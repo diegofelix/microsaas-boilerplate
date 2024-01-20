@@ -1,6 +1,6 @@
 <?php
 
-namespace Battleroad\Championship\Services;
+namespace Battleroad\Championship\Actions;
 
 use Battleroad\Championship\Infra\Http\Requests\RegisterNewChampionship as Request;
 use Battleroad\Championship\Models\Championship;

@@ -4,7 +4,7 @@ namespace Battleroad\Championship\Infra\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Battleroad\Championship\Infra\Http\Requests\RegisterNewChampionship as Request;
-use Battleroad\Championship\Services\RegisterNewChampionship as Service;
+use Battleroad\Championship\Actions\RegisterNewChampionship as Service;
 use Illuminate\Http\JsonResponse;
 use Psy\VarDumper\Presenter;
 
