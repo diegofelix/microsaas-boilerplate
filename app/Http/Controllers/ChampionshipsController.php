@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterNewChampionship;
 use Battleroad\Championship\Repository;
+use Illuminate\Http\JsonResponse;
+use Psy\VarDumper\Presenter;
 
 class ChampionshipsController extends Controller
 {
@@ -12,10 +14,12 @@ class ChampionshipsController extends Controller
         private readonly Presenter $presenter,
     ){}
 
-    public function store(RegisterNewChampionship $request)
+    public function store(RegisterNewChampionship $request): JsonResponse
     {
         $championship = $this->repository->createFromArray($request->validated());
 
-        return $this->presenter->present($championship);
+        $data = $this->presenter->present($championship);
+
+        return response()->json($data);
     }
 }
