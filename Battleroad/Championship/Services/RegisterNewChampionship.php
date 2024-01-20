@@ -2,7 +2,7 @@
 
 namespace Battleroad\Championship\Services;
 
-use App\Http\Requests\RegisterNewChampionship as Request;
+use Battleroad\Championship\Infra\Http\Requests\RegisterNewChampionship as Request;
 use Battleroad\Championship\Models\Championship;
 use Battleroad\Championship\Repository;
 

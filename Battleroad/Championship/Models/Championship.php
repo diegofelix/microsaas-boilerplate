@@ -2,7 +2,7 @@
 
 namespace Battleroad\Championship\Models;
 
-use App\Http\Requests\RegisterNewChampionship;
+use Battleroad\Championship\Infraestructure\Http\Requests\RegisterNewChampionship;
 use Illuminate\Database\Eloquent\Model;
 
 class Championship extends Model
