@@ -29,6 +29,7 @@ class Championship
             'startAt' => $this->startAt->format('Y-m-d H:i:s'),
             'picture' => $this->picture,
             'createdAt' => $this->createdAt,
+            'updatedAt' => $this->updatedAt,
         ];
     }
 }
