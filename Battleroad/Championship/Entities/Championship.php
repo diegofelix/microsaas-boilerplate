@@ -26,10 +26,9 @@ class Championship
             'title' => $this->title,
             'description' => $this->description,
             'location' => $this->location,
-            'startAt' => $this->startAt,
+            'startAt' => $this->startAt->format('Y-m-d H:i:s'),
             'picture' => $this->picture,
             'createdAt' => $this->createdAt,
-            'updatedAt' => $this->updatedAt,
         ];
     }
 }
