@@ -1,6 +1,6 @@
 <?php
 
-namespace Battleroad\Championship;
+namespace Battleroad\Championship\Infra;
 
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 

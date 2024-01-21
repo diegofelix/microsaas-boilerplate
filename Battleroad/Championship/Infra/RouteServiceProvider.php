@@ -1,6 +1,6 @@
 <?php
 
-namespace Battleroad\Championship;
+namespace Battleroad\Championship\Infra;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as BaseRouteProvider;
 use Illuminate\Routing\Router;
@@ -11,7 +11,6 @@ class RouteServiceProvider extends BaseRouteProvider
     {
         $router->middleware(['api', 'auth:sanctum'])
             ->prefix('api/v1')
-            ->namespace('Battleroad\Championship\Http\Controllers')
-            ->group(base_path('Battleroad/Championship/routes/api/v1/routes.php'));
+            ->group(base_path('Battleroad/Championship/Infra/routes/api/v1/routes.php'));
     }
 }

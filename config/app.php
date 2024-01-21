@@ -172,7 +172,7 @@ return [
         /*
          * Battleroad Service Providers
          */
-        \Battleroad\Championship\ServiceProvider::class,
+        \Battleroad\Championship\Infra\ServiceProvider::class,
     ])->toArray(),
 
     /*
