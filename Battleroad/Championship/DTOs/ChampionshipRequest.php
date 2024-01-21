@@ -4,14 +4,14 @@ namespace Battleroad\Championship\DTOs;
 
 use DateTime;
 
-class ChampionshipRequest
+readonly class ChampionshipRequest
 {
     public function __construct(
-        public readonly int $ownerId,
-        public readonly string $title,
-        public readonly string $description,
-        public readonly string $location,
-        public readonly DateTime $eventStart,
-        public readonly string $picture,
+        public int $ownerId,
+        public string $title,
+        public string $description,
+        public string $location,
+        public DateTime $eventStart,
+        public string $picture,
     ) {}
 }
