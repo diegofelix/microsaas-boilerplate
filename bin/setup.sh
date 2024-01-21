@@ -27,12 +27,15 @@ if [ ! -f .docker/config/traefik/acme.json ]; then
     chmod 600 .docker/config/traefik/acme.json
 fi
 
+mkdir -p vendor/pestphp
+mkdir -p vendor/laravel/pint
+
 ## Install dependencies and run migrations
-docker-compose up -d
-docker-compose exec app composer install
-docker-compose exec app php artisan key:generate
-docker-compose exec app php artisan migrate
-docker-compose exec app php artisan db:seed
+docker compose up -d
+docker compose exec app composer install
+docker compose exec app php artisan key:generate
+docker compose exec app php artisan migrate
+docker compose exec app php artisan db:seed
 
 ## Create symbolic link for storage if it doesn't exist
 if [ ! -d storage/app/public ]; then

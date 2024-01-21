@@ -50,8 +50,7 @@ services:
             MYSQL_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
         volumes:
-            - 'sail-mysql:/var/lib/mysql'
-            - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
+            - .docker/data/mysql:/var/lib/mysql
         healthcheck:
             test:
                 - CMD
@@ -66,7 +65,7 @@ services:
         ports:
             - '${FORWARD_REDIS_PORT:-6379}:6379'
         volumes:
-            - 'sail-redis:/data'
+            - .docker/data/redis:/data
         healthcheck:
             test:
                 - CMD
@@ -74,9 +73,3 @@ services:
                 - ping
             retries: 3
             timeout: 5s
-
-volumes:
-    sail-mysql:
-        driver: local
-    sail-redis:
-        driver: local
