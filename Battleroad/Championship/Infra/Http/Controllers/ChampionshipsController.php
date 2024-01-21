@@ -20,11 +20,11 @@ class ChampionshipsController extends Controller
     {
         $championshipRequest = new ChampionshipRequest(
             $request->user()->id,
-            $request->get('name'),
+            $request->get('title'),
             $request->get('description'),
             $request->get('location'),
-            $request->get('eventStart'),
-            $request->get('image')
+            $request->date('eventStart'),
+            $request->get('picture')
         );
 
         $championship = $this->service->execute($championshipRequest);
