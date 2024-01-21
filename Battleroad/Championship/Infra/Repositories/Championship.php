@@ -15,7 +15,7 @@ class Championship
             'title' => $championshipRequest->title,
             'description' => $championshipRequest->description,
             'location' => $championshipRequest->location,
-            'event_start' => $championshipRequest->eventStart,
+            'start_at' => $championshipRequest->startAt,
             'picture' => $championshipRequest->picture
         ]);
 
@@ -35,7 +35,7 @@ class Championship
             $model->title,
             $model->description,
             $model->location,
-            $model->eventStart,
+            $model->startAt,
             $model->picture,
             $model->created_at,
             $model->updated_at,

@@ -11,7 +11,7 @@ readonly class ChampionshipRequest
         public string $title,
         public string $description,
         public string $location,
-        public DateTime $eventStart,
+        public DateTime $startAt,
         public string $picture,
     ) {}
 }

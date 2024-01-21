@@ -23,7 +23,7 @@ class ChampionshipsController extends Controller
             $request->get('title'),
             $request->get('description'),
             $request->get('location'),
-            $request->date('eventStart'),
+            $request->date('startAt'),
             $request->get('picture')
         );
 
