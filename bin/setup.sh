@@ -10,6 +10,9 @@ if [ ! -f database/database.sqlite ]; then
     touch database/database.sqlite
 fi
 
+mkdir -p vendor/pestphp
+mkdir -p vendor/laravel/pint
+
 ## Execute .env file
 source .env
 
@@ -34,6 +37,13 @@ mkdir -p vendor/laravel/pint
 docker compose up -d
 docker compose exec app composer install
 docker compose exec app php artisan key:generate
+
+## Wait for mysql to be ready
+until docker compose exec mysql mysqladmin ping --silent; do
+    echo "Waiting for mysql to be ready..."
+    sleep 5
+done
+
 docker compose exec app php artisan migrate
 docker compose exec app php artisan db:seed
 
