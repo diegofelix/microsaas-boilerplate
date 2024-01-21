@@ -74,3 +74,26 @@ services:
                 - ping
             retries: 3
             timeout: 5s
+
+    mongo:
+        image: mongo:5.0
+        volumes:
+            - .docker/data/mongodb:/data/db
+        command: --auth
+        environment:
+            - MONGO_INITDB_DATABASE=${DB_DATABASE}
+            - MONGO_INITDB_ROOT_USERNAME=${DB_USERNAME}
+            - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
+
+    mongoku:
+        image: huggingface/mongoku
+        environment:
+            - MONGOKU_DEFAULT_HOST=mongodb://app:app@mongo:27017
+        depends_on:
+            - mongo
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.mongoku.rule=Host(`${MONGOKU_URL}`)"
+            - "traefik.http.routers.mongoku.entrypoints=websecure"
+            - "traefik.http.routers.mongoku.tls.certresolver=myresolver"
+            # - "traefik.http.services.mongoku.loadbalancer.server.port=3100"
