@@ -35,7 +35,7 @@ class Championship
             $model->title,
             $model->description,
             $model->location,
-            $model->startAt,
+            $model->start_at,
             $model->picture,
             $model->created_at,
             $model->updated_at,
