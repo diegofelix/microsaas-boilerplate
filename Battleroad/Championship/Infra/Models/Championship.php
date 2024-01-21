@@ -1,8 +1,7 @@
 <?php
 
-namespace Battleroad\Championship\Models;
+namespace Battleroad\Championship\Infra\Models;
 
-use Battleroad\Championship\Infraestructure\Http\Requests\RegisterNewChampionship;
 use Illuminate\Database\Eloquent\Model;
 
 class Championship extends Model

@@ -1,13 +1,12 @@
 <?php
 
-namespace Battleroad\Championship;
+namespace Battleroad\Championship\Infra\Repositories;
 
 use Battleroad\Championship\DTOs\ChampionshipRequest;
 use Battleroad\Championship\Entities\Championship as Entity;
-use Battleroad\Championship\Models\Championship;
-use DateTime;
+use Battleroad\Championship\Infra\Models\Championship as Model;
 
-class Repository
+class Championship
 {
     public function create(ChampionshipRequest $championshipRequest): Entity
     {
@@ -23,12 +22,12 @@ class Repository
         return $this->entityFromModel($model);
     }
 
-    private function getModel(): Championship
+    private function getModel(): Model
     {
-        return new Championship();
+        return new Model();
     }
 
-    private function entityFromModel(Championship $model): Entity
+    private function entityFromModel(Model $model): Entity
     {
         return new Entity(
             $model->id,
