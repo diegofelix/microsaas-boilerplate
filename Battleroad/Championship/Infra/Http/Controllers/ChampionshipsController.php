@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Battleroad\Championship\DTOs\ChampionshipRequest;
 use Battleroad\Championship\Infra\Http\Requests\RegisterNewChampionship as Request;
 use Battleroad\Championship\Actions\RegisterNewChampionship as Service;
+use Battleroad\Championship\Presenters\Championship as Presenter;
 use Illuminate\Http\JsonResponse;
-use Psy\VarDumper\Presenter;
 
 class ChampionshipsController extends Controller
 {
