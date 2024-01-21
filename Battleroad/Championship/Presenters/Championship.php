@@ -2,10 +2,12 @@
 
 namespace Battleroad\Championship\Presenters;
 
+use Battleroad\Championship\Entities\Championship as Entity;
+
 class Championship
 {
-    public function present(Championship $championship): array
+    public function present(Entity $championship): array
     {
-        return $championship->attributesToArray();
+        return $championship->toArray();
     }
 }

@@ -2,8 +2,9 @@
 
 namespace Battleroad\Championship\Actions;
 
+use Battleroad\Championship\DTOs\ChampionshipRequest;
+use Battleroad\Championship\Entities\Championship;
 use Battleroad\Championship\Infra\Http\Requests\RegisterNewChampionship as Request;
-use Battleroad\Championship\Models\Championship;
 use Battleroad\Championship\Repository;
 
 class RegisterNewChampionship
@@ -12,16 +13,9 @@ class RegisterNewChampionship
     {
     }
 
-    public function createFromRequest(Request $request): Championship
+    public function execute(ChampionshipRequest $championshipRequest): Championship
     {
-        return $this->repository->create(
-            $request->user()->id,
-            $request->get('name'),
-            $request->get('description'),
-            $request->get('location'),
-            $request->get('eventStart'),
-            $request->get('image')
-        );
+        return $this->repository->create($championshipRequest);
 
         // @todo Dispatch NewChampionshipWasRegistered
     }
