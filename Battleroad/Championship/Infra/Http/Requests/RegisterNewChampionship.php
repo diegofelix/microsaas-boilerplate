@@ -14,7 +14,11 @@ class RegisterNewChampionship extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'location' => ['required', 'string'],
+            'eventStart' => ['required', 'datetime'],
+            'picture' => ['required', 'string'],
         ];
     }
 }
