@@ -21,13 +21,14 @@ it('cannot create a championship without being logged in', function () {
 
 it('can register a new championship', function () {
     $user = User::factory()->create();
+    $startAt = new DateTime('tomorrow midnight');
 
     actingAs($user)
         ->postJson('api/v1/championships', [
             'title' => 'Capcom Cup',
             'description' => 'The ultimate Fighting Game Championship',
             'location' => 'Brazil',
-            'startAt' => (new DateTime('tomorrow midnight'))->format('Y-m-d'),
+            'startAt' => $startAt->format('Y-m-d'),
             'picture' => 'https://cdn.some.url/picture.jpg',
         ])
         ->assertOk()
@@ -36,6 +37,6 @@ it('can register a new championship', function () {
             'description' => 'The ultimate Fighting Game Championship',
             'location' => 'Brazil',
             'picture' => 'https://cdn.some.url/picture.jpg',
-            'startAt' => '2024-01-22 00:00:00',
+            'startAt' => $startAt->format('Y-m-d H:i:s'),
         ]);
 });
