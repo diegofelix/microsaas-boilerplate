@@ -8,9 +8,11 @@ use Battleroad\Championship\Infra\Models\Championship as Model;
 
 class Championship
 {
+    public function __construct(private readonly Model $model) {}
+
     public function create(ChampionshipRequest $championshipRequest): Entity
     {
-        $model = $this->getModel()->create([
+        $model = $this->model->create([
             'owner_id' => $championshipRequest->ownerId,
             'title' => $championshipRequest->title,
             'description' => $championshipRequest->description,
@@ -20,11 +22,6 @@ class Championship
         ]);
 
         return $this->entityFromModel($model);
-    }
-
-    private function getModel(): Model
-    {
-        return new Model();
     }
 
     private function entityFromModel(Model $model): Entity
