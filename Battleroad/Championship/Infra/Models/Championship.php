@@ -2,7 +2,9 @@
 
 namespace Battleroad\Championship\Infra\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Championship extends Model
 {
@@ -13,4 +15,9 @@ class Championship extends Model
      * @var array
      */
     protected $guarded = [];
+
+    public function owner(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
