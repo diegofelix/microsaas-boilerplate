@@ -1,42 +1,65 @@
 <?php
 
+namespace Tests\Feature\Battleroad\Championship;
+
 use App\Models\User;
-use function Pest\Laravel\{actingAs};
-use function Pest\Laravel\{postJson};
+use DateTime;
+use Tests\TestCase;
 
-it('shows validation errors', function () {
-    $user = User::factory()->create();
+class RegisterChampionshipTest extends TestCase
+{
+    public function test_should_shows_validation_errors(): void
+    {
+        // Set
+        $user = User::factory()->create();
+        $this->actingAs($user);
 
-    actingAs($user)
-        ->postJson('api/v1/championships', ['some' => 'input'])
-        ->assertJsonValidationErrors([
+        // Actions
+        $response = $this->postJson('api/v1/championships', ['some' => 'input']);
+
+        // Assertions
+        $response->assertJsonValidationErrors([
             'title', 'description', 'location', 'startAt', 'picture'
         ]);
-});
+    }
 
-it('cannot create a championship without being logged in', function () {
-    postJson('api/v1/championships', ['some' => 'input'])
-        ->assertUnauthorized();
-});
+    public function test_should_not_create_a_championship_without_being_logged_in(): void
+    {
+        // Set
+        $user = User::factory()->create();
 
-it('can register a new championship', function () {
-    $user = User::factory()->create();
-    $startAt = new DateTime('tomorrow midnight');
+        // Actions
+        $response = $this->postJson('api/v1/championships', ['some' => 'input']);
 
-    actingAs($user)
-        ->postJson('api/v1/championships', [
+        // Assertions
+        $response->assertUnauthorized();
+    }
+
+    public function test_it_can_register_a_new_championship(): void
+    {
+        // Set
+        $user = User::factory()->create();
+        $startAt = new DateTime('tomorrow midnight');
+        $this->actingAs($user);
+
+        // Actions
+        $response = $this->postJson('api/v1/championships', [
             'title' => 'Capcom Cup',
             'description' => 'The ultimate Fighting Game Championship',
             'location' => 'Brazil',
             'startAt' => $startAt->format('Y-m-d'),
             'picture' => 'https://cdn.some.url/picture.jpg',
-        ])
-        ->assertOk()
-        ->assertJsonFragment([
+        ]);
+
+        // Assertions
+        $response->assertOk();
+        $response->assertJsonFragment([
             'title' => 'Capcom Cup',
             'description' => 'The ultimate Fighting Game Championship',
             'location' => 'Brazil',
             'picture' => 'https://cdn.some.url/picture.jpg',
             'startAt' => $startAt->format('Y-m-d H:i:s'),
         ]);
-});
+    }
+}
+

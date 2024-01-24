@@ -6,7 +6,7 @@ use Battleroad\Championship\DTOs\ChampionshipRequest;
 use Battleroad\Championship\Entities\Championship;
 use Battleroad\Championship\Infra\Repositories\Championship as Repository;
 
-readonly class RegisterNewChampionship
+class RegisterNewChampionship
 {
     public function __construct(private readonly Repository $repository)
     {
