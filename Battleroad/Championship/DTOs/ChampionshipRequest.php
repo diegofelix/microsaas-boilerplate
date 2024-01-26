@@ -7,7 +7,7 @@ use DateTime;
 readonly class ChampionshipRequest
 {
     public function __construct(
-        public int $ownerId,
+        public string $ownerId,
         public string $title,
         public string $description,
         public string $location,

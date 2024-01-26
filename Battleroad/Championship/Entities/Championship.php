@@ -7,8 +7,8 @@ use DateTime;
 class Championship
 {
     public function __construct(
-        public readonly int $id,
-        public readonly int $ownerId,
+        public readonly string $id,
+        public readonly string $ownerId,
         public readonly string $title,
         public readonly string $description,
         public readonly string $location,

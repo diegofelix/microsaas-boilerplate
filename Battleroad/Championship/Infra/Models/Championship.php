@@ -3,8 +3,8 @@
 namespace Battleroad\Championship\Infra\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use MongoDB\Laravel\Eloquent\Model;
 
 class Championship extends Model
 {
