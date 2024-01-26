@@ -1,6 +1,6 @@
 <?php
 
-namespace Battleroad\Championship\Presenters;
+namespace Battleroad\Championship\Infra\Presenters;
 
 use Battleroad\Championship\Infra\Models\Championship as Model;
 

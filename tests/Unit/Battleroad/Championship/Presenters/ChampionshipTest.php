@@ -3,7 +3,7 @@
 namespace Tests\Unit\Battleroad\Championship\Presenters;
 
 use Battleroad\Championship\Infra\Database\Factories\Championship;
-use Battleroad\Championship\Presenters\Championship as Presenter;
+use Battleroad\Championship\Infra\Presenters\Championship as Presenter;
 use DateTime;
 use MongoDB\BSON\ObjectId;
 use Tests\TestCase;

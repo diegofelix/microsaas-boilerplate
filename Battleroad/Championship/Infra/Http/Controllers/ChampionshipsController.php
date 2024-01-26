@@ -3,10 +3,10 @@
 namespace Battleroad\Championship\Infra\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Battleroad\Championship\Actions\RegisterNewChampionship as Service;
 use Battleroad\Championship\DTOs\ChampionshipRequest;
 use Battleroad\Championship\Infra\Http\Requests\RegisterNewChampionship as Request;
-use Battleroad\Championship\Actions\RegisterNewChampionship as Service;
-use Battleroad\Championship\Presenters\Championship as Presenter;
+use Battleroad\Championship\Infra\Presenters\Championship as Presenter;
 use Illuminate\Http\JsonResponse;
 
 class ChampionshipsController extends Controller
