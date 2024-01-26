@@ -3,7 +3,6 @@
 namespace Tests\Unit\Battleroad\Championship\Infra\Repositories;
 
 use Battleroad\Championship\DTOs\ChampionshipRequest;
-use Battleroad\Championship\Entities\Championship as Entity;
 use Battleroad\Championship\Infra\Database\Factories\Championship as ChampionshipFactory;
 use Battleroad\Championship\Infra\Models\Championship as Model;
 use Battleroad\Championship\Infra\Repositories\Championship as Repository;
@@ -18,7 +17,7 @@ class ChampionshipTest extends TestCase
         $model = Mockery::mock(Model::class);
 
         $requestData = [
-            'owner_id' => 1,
+            'owner_id' => 'someOwnerId123',
             'title' => fake()->title,
             'description' => fake()->sentence,
             'location' => fake()->country,
@@ -27,7 +26,7 @@ class ChampionshipTest extends TestCase
         ];
 
         $newModel = ChampionshipFactory::new()->make(array_merge(
-            ['id' => 1],
+            ['id' => 'someChampionshipId123'],
             $requestData
         ));
 
@@ -39,11 +38,10 @@ class ChampionshipTest extends TestCase
         // Actions
         $repository = new Repository($model);
         $championshipRequest = new ChampionshipRequest(... array_values($requestData));
-        $entity = $repository->create($championshipRequest);
-
+        $model = $repository->create($championshipRequest);
         // Assertions
-        $this->assertInstanceOf(Entity::class, $entity);
-        $this->assertObjectHasProperty('title', $entity);
-        $this->assertObjectHasProperty('ownerId', $entity);
+        $this->assertInstanceOf(Model::class, $model);
+        $this->assertSame($model->title, $requestData['title']);
+        $this->assertSame($model->owner_id, $requestData['owner_id']);
     }
 }

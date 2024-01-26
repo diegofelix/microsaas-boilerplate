@@ -2,19 +2,19 @@
 
 namespace Battleroad\Championship\Presenters;
 
-use Battleroad\Championship\Entities\Championship as Entity;
+use Battleroad\Championship\Infra\Models\Championship as Model;
 
 class Championship
 {
-    public function present(Entity $entity): array
+    public function present(Model $model): array
     {
         return [
-            'id' => $entity->id,
-            'title' => $entity->title,
-            'description' => $entity->description,
-            'location' => $entity->location,
-            'startAt' => $entity->startAt->format('Y-m-d H:i:s'),
-            'picture' => $entity->picture,
+            'id' => $model->id,
+            'title' => $model->title,
+            'description' => $model->description,
+            'location' => $model->location,
+            'startAt' => $model->start_at->format('Y-m-d H:i:s'),
+            'picture' => $model->picture,
         ];
     }
 }
