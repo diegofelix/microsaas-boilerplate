@@ -4,6 +4,7 @@ namespace Tests\Feature\Battleroad\Championship;
 
 use App\Models\User;
 use DateTime;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class RegisterChampionshipTest extends TestCase
@@ -52,7 +53,7 @@ class RegisterChampionshipTest extends TestCase
         ]);
 
         // Assertions
-        $response->assertOk();
+        $response->assertStatus(Response::HTTP_CREATED);
         $response->assertJsonFragment([
             'title' => 'Capcom Cup',
             'description' => 'The ultimate Fighting Game Championship',

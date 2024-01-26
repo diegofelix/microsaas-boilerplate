@@ -8,6 +8,7 @@ use Battleroad\Championship\DTOs\ChampionshipRequest;
 use Battleroad\Championship\Infra\Http\Requests\RegisterNewChampionship as Request;
 use Battleroad\Championship\Infra\Presenters\Championship as Presenter;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class ChampionshipsController extends Controller
 {
@@ -31,6 +32,6 @@ class ChampionshipsController extends Controller
 
         $data = $this->presenter->present($championship);
 
-        return response()->json($data);
+        return response()->json($data, Response::HTTP_CREATED);
     }
 }
