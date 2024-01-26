@@ -173,6 +173,8 @@ return [
          * Battleroad Service Providers
          */
         \Battleroad\Championship\Infra\ServiceProvider::class,
+
+        MongoDB\Laravel\Auth\PasswordResetServiceProvider::class,
     ])->toArray(),
 
     /*
