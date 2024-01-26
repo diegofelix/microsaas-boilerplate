@@ -21,6 +21,7 @@ RUN apt-get update -qq \
     libfreetype6-dev \
     libmcrypt-dev \
     openssh-client \
+    libmongoc-dev \
  && apt-get clean
 
 RUN apt-get update
@@ -47,9 +48,9 @@ RUN rm -r /tmp/imagick
 RUN echo "extension=imagick.so" >> /usr/local/etc/php/conf.d/20-imagick.ini
 RUN php -m | grep -q 'imagick'
 
-RUN printf "\n" | pecl install -o -f redis \
-    && rm -rf /tmp/pear \
-    && docker-php-ext-enable redis
+RUN printf "\n" | pecl install -o -f redis mongodb \
+    && docker-php-ext-enable redis mongodb \
+    && rm -rf /tmp/pear
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 

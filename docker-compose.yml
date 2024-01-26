@@ -38,7 +38,7 @@ services:
             - "traefik.http.routers.backend.entrypoints=websecure"
             - "traefik.http.routers.backend.tls=true"
         depends_on:
-            - mysql
+            - mongo
             - redis
 
     mysql:
