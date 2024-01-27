@@ -4,7 +4,7 @@ namespace Tests\Unit\Battleroad\Championship\Actions;
 
 use Battleroad\Championship\Actions\RegisterNewChampionship;
 use Battleroad\Championship\DTOs\ChampionshipRequest;
-use Battleroad\Championship\Entities\Championship as ChampionshipEntity;
+use Battleroad\Championship\Infra\Models\Championship as ChampionshipModel;
 use Battleroad\Championship\Infra\Repositories\Championship as ChampionshipRepository;
 use Mockery;
 use PHPUnit\Framework\TestCase;
@@ -16,7 +16,7 @@ class RegisterNewChampionshipTest extends TestCase
         // Set
         $repository = Mockery::mock(ChampionshipRepository::class);
         $action = new RegisterNewChampionship($repository);
-        $entity = Mockery::mock(ChampionshipEntity::class);
+        $model = Mockery::mock(ChampionshipModel::class);
         $request = new ChampionshipRequest(
             1,
             'title',
@@ -29,12 +29,12 @@ class RegisterNewChampionshipTest extends TestCase
         // Expectations
         $repository->expects()
             ->create($request)
-            ->andReturn($entity);
+            ->andReturn($model);
 
         // Actions
         $result = $action->execute($request);
 
         // Assertions
-        $this->assertSame($entity, $result);
+        $this->assertSame($model, $result);
     }
 }

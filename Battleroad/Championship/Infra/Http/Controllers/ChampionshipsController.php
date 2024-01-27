@@ -3,11 +3,12 @@
 namespace Battleroad\Championship\Infra\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Battleroad\Championship\Actions\RegisterNewChampionship as Service;
 use Battleroad\Championship\DTOs\ChampionshipRequest;
 use Battleroad\Championship\Infra\Http\Requests\RegisterNewChampionship as Request;
-use Battleroad\Championship\Actions\RegisterNewChampionship as Service;
-use Battleroad\Championship\Presenters\Championship as Presenter;
+use Battleroad\Championship\Infra\Presenters\Championship as Presenter;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class ChampionshipsController extends Controller
 {
@@ -29,8 +30,8 @@ class ChampionshipsController extends Controller
 
         $championship = $this->service->execute($championshipRequest);
 
-        $data = $this->presenter->present($championship);
+        $data = $this->presenter->single($championship);
 
-        return response()->json($data);
+        return response()->json($data, Response::HTTP_CREATED);
     }
 }

@@ -3,7 +3,7 @@
 namespace Battleroad\Championship\Actions;
 
 use Battleroad\Championship\DTOs\ChampionshipRequest;
-use Battleroad\Championship\Entities\Championship;
+use Battleroad\Championship\Infra\Models\Championship as ChampionshipModel;
 use Battleroad\Championship\Infra\Repositories\Championship as Repository;
 
 class RegisterNewChampionship
@@ -12,7 +12,7 @@ class RegisterNewChampionship
     {
     }
 
-    public function execute(ChampionshipRequest $championshipRequest): Championship
+    public function execute(ChampionshipRequest $championshipRequest): ChampionshipModel
     {
         return $this->repository->create($championshipRequest);
 
