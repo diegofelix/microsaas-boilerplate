@@ -3,6 +3,9 @@
 namespace Tests\Feature\Battleroad\Championship;
 
 use App\Models\User;
+use Battleroad\Championship\Infra\Database\Factories\Championship;
+use Battleroad\Championship\Infra\Database\Factories\Game;
+use Battleroad\Championship\Infra\Database\Factories\Platform;
 use DateTime;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
@@ -19,6 +22,7 @@ class RegisterChampionshipTest extends TestCase
         $response = $this->postJson('api/v1/championships', ['some' => 'input']);
 
         // Assertions
+        $response->assertUnprocessable();
         $response->assertJsonValidationErrors([
             'title', 'description', 'location', 'startAt', 'picture'
         ]);
@@ -26,9 +30,6 @@ class RegisterChampionshipTest extends TestCase
 
     public function test_should_not_create_a_championship_without_being_logged_in(): void
     {
-        // Set
-        $user = User::factory()->create();
-
         // Actions
         $response = $this->postJson('api/v1/championships', ['some' => 'input']);
 
@@ -48,7 +49,7 @@ class RegisterChampionshipTest extends TestCase
             'title' => 'Capcom Cup',
             'description' => 'The ultimate Fighting Game Championship',
             'location' => 'Brazil',
-            'startAt' => $startAt->format('Y-m-d'),
+            'startAt' => $startAt->format('Y-m-d H:i:s'),
             'picture' => 'https://cdn.some.url/picture.jpg',
         ]);
 

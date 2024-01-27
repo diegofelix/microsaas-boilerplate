@@ -29,4 +29,9 @@ class Championship extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function competitions(): EmbedsMany
+    {
+        return $this->embedsMany(Competition::class);
+    }
 }

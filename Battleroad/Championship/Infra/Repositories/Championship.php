@@ -2,6 +2,7 @@
 
 namespace Battleroad\Championship\Infra\Repositories;
 
+use Battleroad\Championship\DTOs\AddCompetitionRequest;
 use Battleroad\Championship\DTOs\ChampionshipRequest;
 use Battleroad\Championship\Infra\Models\Championship as Model;
 
@@ -19,5 +20,17 @@ class Championship
             'start_at' => $championshipRequest->startAt,
             'picture' => $championshipRequest->picture
         ]);
+    }
+
+    public function addCompetition(AddCompetitionRequest $request): Model
+    {
+        $championship = $request->championship;
+        $championship->competitions()->create([
+            'game_id' => $request->gameId,
+            'platform_id' => $request->platformId,
+            'start_at' => $request->startAt,
+        ]);
+
+        return $championship;
     }
 }

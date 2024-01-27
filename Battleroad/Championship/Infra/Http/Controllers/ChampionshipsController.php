@@ -30,7 +30,7 @@ class ChampionshipsController extends Controller
 
         $championship = $this->service->execute($championshipRequest);
 
-        $data = $this->presenter->present($championship);
+        $data = $this->presenter->single($championship);
 
         return response()->json($data, Response::HTTP_CREATED);
     }
