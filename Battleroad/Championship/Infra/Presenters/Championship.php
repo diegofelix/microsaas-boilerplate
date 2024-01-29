@@ -9,7 +9,8 @@ class Championship
 {
     public function __construct(
         private readonly CompetitionPresenter $competition,
-    ) {}
+    ) {
+    }
 
     public function single(ChampionshipModel $championship): array
     {

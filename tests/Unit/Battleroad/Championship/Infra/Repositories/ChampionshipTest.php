@@ -37,7 +37,7 @@ class ChampionshipTest extends TestCase
 
         // Actions
         $repository = new Repository($model);
-        $championshipRequest = new ChampionshipRequest(... array_values($requestData));
+        $championshipRequest = new ChampionshipRequest(...array_values($requestData));
         $model = $repository->create($championshipRequest);
         // Assertions
         $this->assertInstanceOf(Model::class, $model);

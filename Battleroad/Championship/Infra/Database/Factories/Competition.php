@@ -2,7 +2,6 @@
 
 namespace Battleroad\Championship\Infra\Database\Factories;
 
-use Battleroad\Championship\Infra\Models\Championship as ChampionshipModel;
 use Battleroad\Championship\Infra\Models\Competition as CompetitionModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

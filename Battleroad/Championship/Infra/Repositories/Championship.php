@@ -8,7 +8,9 @@ use Battleroad\Championship\Infra\Models\Championship as Model;
 
 class Championship
 {
-    public function __construct(private readonly Model $model) {}
+    public function __construct(private readonly Model $model)
+    {
+    }
 
     public function create(ChampionshipRequest $championshipRequest): Model
     {
@@ -18,7 +20,7 @@ class Championship
             'description' => $championshipRequest->description,
             'location' => $championshipRequest->location,
             'start_at' => $championshipRequest->startAt,
-            'picture' => $championshipRequest->picture
+            'picture' => $championshipRequest->picture,
         ]);
     }
 

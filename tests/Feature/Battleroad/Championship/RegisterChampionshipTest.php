@@ -3,9 +3,6 @@
 namespace Tests\Feature\Battleroad\Championship;
 
 use App\Models\User;
-use Battleroad\Championship\Infra\Database\Factories\Championship;
-use Battleroad\Championship\Infra\Database\Factories\Game;
-use Battleroad\Championship\Infra\Database\Factories\Platform;
 use DateTime;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
@@ -24,7 +21,7 @@ class RegisterChampionshipTest extends TestCase
         // Assertions
         $response->assertUnprocessable();
         $response->assertJsonValidationErrors([
-            'title', 'description', 'location', 'startAt', 'picture'
+            'title', 'description', 'location', 'startAt', 'picture',
         ]);
     }
 
@@ -64,4 +61,3 @@ class RegisterChampionshipTest extends TestCase
         ]);
     }
 }
-

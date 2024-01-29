@@ -6,5 +6,4 @@ use MongoDB\Laravel\Eloquent\Model;
 
 class Game extends Model
 {
-
 }

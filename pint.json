@@ -1,0 +1,8 @@
+{
+    "exclude": [
+        ".docker",
+        ".config",
+        ".local",
+        "bin"
+    ]
+}

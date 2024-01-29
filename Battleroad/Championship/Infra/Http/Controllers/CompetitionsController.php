@@ -16,7 +16,8 @@ class CompetitionsController extends Controller
     public function __construct(
         private readonly AddCompetitionToChampionship $service,
         private readonly Presenter $presenter,
-    ) {}
+    ) {
+    }
 
     public function store(Championship $championship, AddCompetition $request): JsonResponse
     {

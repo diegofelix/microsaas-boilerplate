@@ -9,7 +9,6 @@ use MongoDB\Laravel\Relations\EmbedsMany;
 
 class Championship extends Model
 {
-
     /**
      * Cast dates from UTCDateTime to DateTime and vice-versa.
      *

@@ -12,5 +12,6 @@ readonly class AddCompetitionRequest
         public string $gameId,
         public string $platformId,
         public DateTime $startAt,
-    ) {}
+    ) {
+    }
 }

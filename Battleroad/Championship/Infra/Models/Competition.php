@@ -4,7 +4,6 @@ namespace Battleroad\Championship\Infra\Models;
 
 use MongoDB\Laravel\Eloquent\Model;
 use MongoDB\Laravel\Relations\BelongsTo;
-use MongoDB\Laravel\Relations\EmbedsOne;
 
 class Competition extends Model
 {

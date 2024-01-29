@@ -7,10 +7,8 @@ use Battleroad\Championship\Infra\Database\Factories\Competition;
 use Battleroad\Championship\Infra\Models\Championship as ChampionshipModel;
 use Battleroad\Championship\Infra\Presenters\Championship as Presenter;
 use Battleroad\Championship\Infra\Presenters\Competition as CompetitionPresenter;
-use DateTime;
 use Mockery;
 use MongoDB\BSON\ObjectId;
-use MongoDB\Laravel\Eloquent\Model;
 use Tests\TestCase;
 
 class ChampionshipTest extends TestCase
