@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\Battleroad\Championship\Actions;
 
-use Battleroad\Championship\Actions\RegisterNewChampionship;
 use Battleroad\Championship\DTOs\ChampionshipRequest;
 use Battleroad\Championship\Infra\Models\Championship as ChampionshipModel;
 use Battleroad\Championship\Infra\Repositories\ChampionshipRepository;
+use Battleroad\Championship\UseCases\RegisterNewChampionship;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 

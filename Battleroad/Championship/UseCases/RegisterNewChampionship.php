@@ -1,6 +1,6 @@
 <?php
 
-namespace Battleroad\Championship\Actions;
+namespace Battleroad\Championship\UseCases;
 
 use Battleroad\Championship\DTOs\ChampionshipRequest;
 use Battleroad\Championship\Infra\Models\Championship as ChampionshipModel;
