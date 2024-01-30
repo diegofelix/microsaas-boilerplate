@@ -6,7 +6,7 @@ use Battleroad\Championship\DTOs\AddCompetitionRequest;
 use Battleroad\Championship\DTOs\ChampionshipRequest;
 use Battleroad\Championship\Infra\Models\Championship as Model;
 
-class Championship
+class ChampionshipRepository
 {
     public function __construct(private readonly Model $model)
     {

@@ -2,12 +2,12 @@
 
 namespace Battleroad\Championship\Infra\Database\Factories;
 
-use Battleroad\Championship\Infra\Models\Platform as PlatformModel;
+use Battleroad\Championship\Infra\Models\Game as GameModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class Platform extends Factory
+class GameFactory extends Factory
 {
-    protected $model = PlatformModel::class;
+    protected $model = GameModel::class;
 
     public function definition(): array
     {

@@ -3,9 +3,9 @@
 namespace Tests\Feature\Battleroad\Championship;
 
 use App\Models\User;
-use Battleroad\Championship\Infra\Database\Factories\Championship;
-use Battleroad\Championship\Infra\Database\Factories\Game;
-use Battleroad\Championship\Infra\Database\Factories\Platform;
+use Battleroad\Championship\Infra\Database\Factories\ChampionshipFactory;
+use Battleroad\Championship\Infra\Database\Factories\GameFactory;
+use Battleroad\Championship\Infra\Database\Factories\PlatformFactory;
 use DateTime;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
@@ -29,7 +29,7 @@ class AddCompetitionTest extends TestCase
     {
         // Set
         $user = User::factory()->create();
-        $championship = Championship::new()->create();
+        $championship = ChampionshipFactory::new()->create();
         $championshipId = $championship->_id;
         $startAt = new DateTime('tomorrow midnight');
         $this->actingAs($user);
@@ -59,9 +59,9 @@ class AddCompetitionTest extends TestCase
     {
         // Set
         $user = User::factory()->create();
-        $championship = Championship::new()->create();
-        $game = Game::new()->create();
-        $platform = Platform::new()->create();
+        $championship = ChampionshipFactory::new()->create();
+        $game = GameFactory::new()->create();
+        $platform = PlatformFactory::new()->create();
         $championshipId = $championship->_id;
         $startAt = new DateTime('tomorrow midnight');
         $this->actingAs($user);

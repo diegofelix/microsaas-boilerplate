@@ -3,9 +3,8 @@
 namespace Battleroad\Championship\Infra\Presenters;
 
 use Battleroad\Championship\Infra\Models\Championship as ChampionshipModel;
-use Battleroad\Championship\Infra\Presenters\Competition as CompetitionPresenter;
 
-class Championship
+class ChampionshipPresenter
 {
     public function __construct(
         private readonly CompetitionPresenter $competition,

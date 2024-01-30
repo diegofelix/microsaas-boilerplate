@@ -5,7 +5,7 @@ namespace Battleroad\Championship\Infra\Presenters;
 use Battleroad\Championship\Infra\Models\Competition as CompetitionModel;
 use Illuminate\Database\Eloquent\Collection;
 
-class Competition
+class CompetitionPresenter
 {
     public function single(CompetitionModel $competition): array
     {

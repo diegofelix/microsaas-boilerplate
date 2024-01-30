@@ -3,13 +3,13 @@
 namespace Tests\Unit\Battleroad\Championship\Infra\Repositories;
 
 use Battleroad\Championship\DTOs\ChampionshipRequest;
-use Battleroad\Championship\Infra\Database\Factories\Championship as ChampionshipFactory;
+use Battleroad\Championship\Infra\Database\Factories\ChampionshipFactory;
 use Battleroad\Championship\Infra\Models\Championship as Model;
-use Battleroad\Championship\Infra\Repositories\Championship as Repository;
+use Battleroad\Championship\Infra\Repositories\ChampionshipRepository;
 use Mockery;
 use Tests\TestCase;
 
-class ChampionshipTest extends TestCase
+class ChampionshipRepositoryTest extends TestCase
 {
     public function test_it_creates_a_new_championship(): void
     {
@@ -36,7 +36,7 @@ class ChampionshipTest extends TestCase
             ->andReturn($newModel);
 
         // Actions
-        $repository = new Repository($model);
+        $repository = new ChampionshipRepository($model);
         $championshipRequest = new ChampionshipRequest(...array_values($requestData));
         $model = $repository->create($championshipRequest);
         // Assertions

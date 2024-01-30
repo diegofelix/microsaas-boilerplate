@@ -2,23 +2,23 @@
 
 namespace Tests\Unit\Battleroad\Championship\Presenters;
 
-use Battleroad\Championship\Infra\Database\Factories\Championship;
-use Battleroad\Championship\Infra\Database\Factories\Competition;
+use Battleroad\Championship\Infra\Database\Factories\ChampionshipFactory;
+use Battleroad\Championship\Infra\Database\Factories\CompetitionFactory;
 use Battleroad\Championship\Infra\Models\Championship as ChampionshipModel;
-use Battleroad\Championship\Infra\Presenters\Championship as Presenter;
-use Battleroad\Championship\Infra\Presenters\Competition as CompetitionPresenter;
+use Battleroad\Championship\Infra\Presenters\ChampionshipPresenter;
+use Battleroad\Championship\Infra\Presenters\CompetitionPresenter;
 use Mockery;
 use MongoDB\BSON\ObjectId;
 use Tests\TestCase;
 
-class ChampionshipTest extends TestCase
+class ChampionshipPresenterTest extends TestCase
 {
     public function test_it_presents_a_championship(): void
     {
         // Set
         $competitionPresenter = Mockery::mock(CompetitionPresenter::class);
-        $presenter = new Presenter($competitionPresenter);
-        $model = Championship::new()->make();
+        $presenter = new ChampionshipPresenter($competitionPresenter);
+        $model = ChampionshipFactory::new()->make();
         $model->_id = new ObjectId();
 
         $expectedData = [
@@ -47,10 +47,10 @@ class ChampionshipTest extends TestCase
     {
         // Set
         $competitionPresenter = Mockery::mock(CompetitionPresenter::class);
-        $presenter = new Presenter($competitionPresenter);
+        $presenter = new ChampionshipPresenter($competitionPresenter);
         /** @var ChampionshipModel $model */
-        $model = Championship::new()->make();
-        $competitions = Competition::new()->make();
+        $model = ChampionshipFactory::new()->make();
+        $competitions = CompetitionFactory::new()->make();
         $model->_id = new ObjectId();
         $model->competitions()->associate($competitions);
 

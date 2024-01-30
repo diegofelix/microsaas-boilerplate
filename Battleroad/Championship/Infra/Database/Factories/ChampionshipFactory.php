@@ -5,7 +5,7 @@ namespace Battleroad\Championship\Infra\Database\Factories;
 use Battleroad\Championship\Infra\Models\Championship as ChampionshipModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class Championship extends Factory
+class ChampionshipFactory extends Factory
 {
     protected $model = ChampionshipModel::class;
 

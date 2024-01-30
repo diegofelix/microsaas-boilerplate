@@ -7,7 +7,7 @@ use Battleroad\Championship\Actions\AddCompetitionToChampionship;
 use Battleroad\Championship\DTOs\AddCompetitionRequest as CompetitionRequest;
 use Battleroad\Championship\Infra\Http\Requests\AddCompetition;
 use Battleroad\Championship\Infra\Models\Championship;
-use Battleroad\Championship\Infra\Presenters\Championship as Presenter;
+use Battleroad\Championship\Infra\Presenters\ChampionshipPresenter;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -15,7 +15,7 @@ class CompetitionsController extends Controller
 {
     public function __construct(
         private readonly AddCompetitionToChampionship $service,
-        private readonly Presenter $presenter,
+        private readonly ChampionshipPresenter $presenter,
     ) {
     }
 

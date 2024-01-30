@@ -4,11 +4,11 @@ namespace Battleroad\Championship\Actions;
 
 use Battleroad\Championship\DTOs\ChampionshipRequest;
 use Battleroad\Championship\Infra\Models\Championship as ChampionshipModel;
-use Battleroad\Championship\Infra\Repositories\Championship as Repository;
+use Battleroad\Championship\Infra\Repositories\ChampionshipRepository;
 
 class RegisterNewChampionship
 {
-    public function __construct(private readonly Repository $repository)
+    public function __construct(private readonly ChampionshipRepository $repository)
     {
     }
 
