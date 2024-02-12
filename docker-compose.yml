@@ -22,9 +22,6 @@ services:
             - "traefik.http.routers.traefik.service=api@internal"
             - "traefik.http.routers.traefik.entrypoints=websecure"
             - "traefik.http.routers.traefik.tls.certresolver=myresolver"
-        depends_on:
-            - mysql
-            - redis
 
     app:
         build:
@@ -38,28 +35,29 @@ services:
             - "traefik.http.routers.backend.entrypoints=websecure"
             - "traefik.http.routers.backend.tls=true"
         depends_on:
+            - proxy
             - mongo
             - redis
 
-    mysql:
-        image: 'mysql:8.3.0'
-        ports:
-            - '${FORWARD_DB_PORT:-3306}:3306'
-        environment:
-            - MYSQL_DATABASE=${DB_DATABASE}
-            - MYSQL_USER=${DB_USERNAME}
-            - MYSQL_PASSWORD=${DB_PASSWORD}
-            - MYSQL_ALLOW_EMPTY_PASSWORD=false
-        volumes:
-            - .docker/data/mysql:/var/lib/mysql
-        healthcheck:
-            test:
-                - CMD
-                - mysqladmin
-                - ping
-                - '-p${DB_PASSWORD}'
-            retries: 3
-            timeout: 5s
+#    mysql:
+#        image: 'mysql:8.3.0'
+#        ports:
+#            - '${FORWARD_DB_PORT:-3306}:3306'
+#        environment:
+#            - MYSQL_DATABASE=${DB_DATABASE}
+#            - MYSQL_USER=${DB_USERNAME}
+#            - MYSQL_PASSWORD=${DB_PASSWORD}
+#            - MYSQL_ALLOW_EMPTY_PASSWORD=false
+#        volumes:
+#            - .docker/data/mysql:/var/lib/mysql
+#        healthcheck:
+#            test:
+#                - CMD
+#                - mysqladmin
+#                - ping
+#                - '-p${DB_PASSWORD}'
+#            retries: 3
+#            timeout: 5s
 
     redis:
         image: 'redis:alpine'
@@ -85,15 +83,15 @@ services:
             - MONGO_INITDB_ROOT_USERNAME=${DB_USERNAME}
             - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
 
-    mongoku:
-        image: huggingface/mongoku
-        environment:
-            - MONGOKU_DEFAULT_HOST=mongodb://app:app@mongo:27017
-        depends_on:
-            - mongo
-        labels:
-            - "traefik.enable=true"
-            - "traefik.http.routers.mongoku.rule=Host(`${MONGOKU_URL}`)"
-            - "traefik.http.routers.mongoku.entrypoints=websecure"
-            - "traefik.http.routers.mongoku.tls.certresolver=myresolver"
-            # - "traefik.http.services.mongoku.loadbalancer.server.port=3100"
+#    mongoku:
+#        image: huggingface/mongoku
+#        environment:
+#            - MONGOKU_DEFAULT_HOST=mongodb://app:app@mongo:27017
+#        depends_on:
+#            - mongo
+#        labels:
+#            - "traefik.enable=true"
+#            - "traefik.http.routers.mongoku.rule=Host(`${MONGOKU_URL}`)"
+#            - "traefik.http.routers.mongoku.entrypoints=websecure"
+#            - "traefik.http.routers.mongoku.tls.certresolver=myresolver"
+#            # - "traefik.http.services.mongoku.loadbalancer.server.port=3100"
