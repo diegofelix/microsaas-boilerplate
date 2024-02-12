@@ -23,6 +23,13 @@ services:
             - "traefik.http.routers.traefik.entrypoints=websecure"
             - "traefik.http.routers.traefik.tls.certresolver=myresolver"
 
+    front:
+        image: node:latest
+        volumes:
+            - .:/var/www/
+        working_dir: /var/www
+        user: "1000:1000"
+
     app:
         build:
             context: ./.docker/build/app/
