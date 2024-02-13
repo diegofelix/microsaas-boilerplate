@@ -8,7 +8,7 @@ services:
             - "--entrypoints.web.address=:80"
             - "--entrypoints.websecure.address=:443"
             - "--certificatesResolvers.myresolver.acme.httpChallenge.entryPoint=web"
-            - "--certificatesResolvers.myresolver.acme.email=youremail@example.com"
+            - "--certificatesResolvers.myresolver.acme.email=diegoflx.oliveira@gmail.com"
             - "--certificatesResolvers.myresolver.acme.storage=/acme.json"
         ports:
             - "80:80"
@@ -23,28 +23,45 @@ services:
             - "traefik.http.routers.traefik.entrypoints=websecure"
             - "traefik.http.routers.traefik.tls.certresolver=myresolver"
 
-    front:
-        image: node:latest
-        volumes:
-            - .:/var/www/
-        working_dir: /var/www
-        user: "1000:1000"
-
-    app:
+    backend:
         build:
-            context: ./.docker/build/app/
+            context: .docker/build/backend/
             dockerfile: Dockerfile
         volumes:
-            - .:/var/www/
+            - ./backend:/var/www/
         labels:
             - "traefik.enable=true"
-            - "traefik.http.routers.backend.rule=Host(`${APP_DOMAIN}`)"
+            - "traefik.http.routers.backend.rule=Host(`${BACKEND_DOMAIN}`)"
             - "traefik.http.routers.backend.entrypoints=websecure"
             - "traefik.http.routers.backend.tls=true"
+#            - "traefik.http.routers.backend.middlewares=backend_repath"
+#            - "traefik.http.middlewares.backend_repath.replacepathregex.regex=^/(.*)"
+#            - "traefik.http.middlewares.backend_repath.replacepathregex.replacement=/api/$${1}"
         depends_on:
             - proxy
             - mongo
             - redis
+        env_file: ./backend/.env
+
+    frontend:
+        build:
+            context: .docker/build/frontend
+        environment:
+            - NODE_OPTIONS=--openssl-legacy-provider
+        working_dir: /var/www/
+        command: npm run dev
+        volumes:
+            - ./frontend:/var/www
+            - ./public:/var/www/dist
+        depends_on:
+            - proxy
+            - backend
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.frontend.rule=Host(`${FRONTEND_DOMAIN}`)"
+            - "traefik.http.routers.frontend.entrypoints=websecure"
+            - "traefik.http.routers.frontend.tls=true"
+            - "traefik.http.services.frontend.loadbalancer.server.port=3000"
 
 #    mysql:
 #        image: 'mysql:8.3.0'
@@ -93,7 +110,7 @@ services:
 #    mongoku:
 #        image: huggingface/mongoku
 #        environment:
-#            - MONGOKU_DEFAULT_HOST=mongodb://app:app@mongo:27017
+#            - MONGOKU_DEFAULT_HOST=mongodb://backend:backend@mongo:27017
 #        depends_on:
 #            - mongo
 #        labels:
