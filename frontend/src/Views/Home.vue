@@ -1,29 +1,19 @@
 <template>
-    <section class="bg-black text-white p-16">
-        <div class="container mx-auto flex justify-between items-center">
-            <div>
-                <h1 class="text-5xl font-bold mb-4">Gerencie seus campeonatos</h1>
-                <p class="mb-8">Uma plataforma completa para competidores e organizadores de campeonatos</p>
-                <a href="#" class="bg-yellow-500 text-black px-4 py-2 rounded">Leia mais</a>
+    <div class="py-32 sm:py-48 lg:py-48">
+        <div class="hidden sm:mb-8 sm:flex sm:justify-center">
+            <div class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+                Announcing our next round of funding. <a href="#" class="font-semibold text-indigo-600"><span class="absolute inset-0" aria-hidden="true" />Read more <span aria-hidden="true">&rarr;</span></a>
             </div>
         </div>
-    </section>
-
-    <section class="container mx-auto p-8">
-        <h2 class="text-3xl font-bold mb-6">Próximos campeonatos</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="font-bold text-xl mb-2">BRKumite</h3>
-                <a href="#" class="bg-yellow-500 text-black px-4 py-2 rounded block text-center mt-4">Entre agora!</a>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="font-bold text-xl mb-2">Circuito Silva Games</h3>
-                <a href="#" class="bg-yellow-500 text-black px-4 py-2 rounded block text-center mt-4">Entre agora!</a>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="font-bold text-xl mb-2">Battle Coliseum</h3>
-                <a href="#" class="bg-yellow-500 text-black px-4 py-2 rounded block text-center mt-4">Entre agora!</a>
+        <div class="text-center">
+            <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Data to enrich your online business</h1>
+            <p class="mt-6 text-lg leading-8 text-gray-600">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.</p>
+            <div class="mt-10 flex items-center justify-center gap-x-6">
+                <a href="#" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get started</a>
+                <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Learn more <span aria-hidden="true">→</span></a>
             </div>
         </div>
-    </section>
+    </div>
 </template>
+<script setup>
+</script>
