@@ -1,13 +1,14 @@
 <?php
 
-namespace Database\Factories;
+namespace Battleroad\Account\Infra\Database\Factories;
 
+use Battleroad\Account\Infra\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Battleroad\Account\Infra\Models\User>
  */
 class UserFactory extends Factory
 {
@@ -15,6 +16,13 @@ class UserFactory extends Factory
      * The current password being used by the factory.
      */
     protected static ?string $password;
+
+    /**
+     * Model used by factory.
+     *
+     * @var string
+     */
+    protected $model = User::class;
 
     /**
      * Define the model's default state.
