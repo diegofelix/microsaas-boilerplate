@@ -1,5 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router';
 import DefaultLayout from "../Layouts/DefaultLayout.vue";
+import DashboardLayout from "../Layouts/DashboardLayout.vue";
+import Dashboard from "../Views/Dashboard.vue";
 
 const Home = () => import("../Views/Home.vue")
 const Championships = () => import("../Views/Championships.vue")
@@ -16,6 +18,13 @@ const routes = [
             { path: 'login', name: 'session.create', component: Login },
             { path: 'ranking', name: 'ranking', component: Championships },
             { path: 'ranking', name: 'how-it-works', component: Championships },
+        ]
+    },
+    {
+        path: '/dashboard',
+        component: DashboardLayout,
+        children: [
+            { path: '/dashboard', name: 'dashboard', component: Dashboard },
         ]
     },
 ];

@@ -54,9 +54,10 @@ const router = useRouter()
 const login = async () => {
     try {
         await axios.get('/sanctum/csrf-cookie')
-        const response = await axios.post('/login', form.value)
+        await axios.post('/login', form.value)
+        const response = await axios.get('/api/v1/user');
 
-        router.push({ name: 'dashboard' })
+        router.push({ name: 'dashboard'})
     } catch (error) {
         if (error.response && error.response.status === 422) {
             errors.value = error.response.data.errors
