@@ -12,6 +12,6 @@ class RouteServiceProvider extends BaseRouteProvider
         $router->middleware(['api', 'auth:sanctum'])
             ->prefix('api/v1')
             ->as('api.v1.')
-            ->group(base_path('Battleroad/Championship/Infra/routes/api/v1/routes.php'));
+            ->group(base_path('Battleroad/Championship/Infra/routes/api.php'));
     }
 }

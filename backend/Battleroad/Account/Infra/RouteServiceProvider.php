@@ -9,9 +9,12 @@ class RouteServiceProvider extends BaseRouteProvider
 {
     public function map(Router $router): void
     {
+        $router->middleware('web')
+            ->group(base_path('Battleroad/Account/Infra/routes/web.php'));
+
         $router->middleware(['api', 'auth:sanctum'])
             ->prefix('api/v1')
             ->as('api.v1.')
-            ->group(base_path('Battleroad/Account/Infra/routes/api/v1/routes.php'));
+            ->group(base_path('Battleroad/Account/Infra/routes/api.php'));
     }
 }

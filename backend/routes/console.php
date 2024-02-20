@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
-| Console Routes
+| Console routes
 |--------------------------------------------------------------------------
 |
 | This file is where you may define all of your Closure based console
