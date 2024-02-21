@@ -43,6 +43,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
+import { useAuthStore } from "../stores/auth.js";
 
 const form = ref({
     email: '',
@@ -51,11 +52,11 @@ const form = ref({
 const errors = ref([])
 const router = useRouter()
 
+const authStore = useAuthStore()
+
 const login = async () => {
     try {
-        await axios.get('/sanctum/csrf-cookie')
-        await axios.post('/login', form.value)
-        const response = await axios.get('/api/v1/user');
+        await authStore.login(form.value)
 
         router.push({ name: 'dashboard'})
     } catch (error) {
