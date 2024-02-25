@@ -35,9 +35,7 @@
                                         <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
                                             <router-link :to="{ name: item.route }" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item.name }}</router-link>
                                         </MenuItem>
-                                        <MenuItem v-slot="{ active }">
-                                            <a href="#" @click="logout" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign out</a>
-                                        </MenuItem>
+                                        <LogoutButton></LogoutButton>
                                     </MenuItems>
                                 </transition>
                             </Menu>
@@ -98,7 +96,7 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { useAuthStore } from '../stores/auth.js'
-import router from "../router/index.js";
+import LogoutButton from "../components/LogoutButton.vue";
 
 const authStore = useAuthStore()
 
@@ -117,20 +115,5 @@ const navigation = [
 const userNavigation = [
     { name: 'Your Profile', route: 'dashboard' },
     { name: 'Settings', route: 'dashboard' },
-    /*{ name: 'Sign out', route: 'Logout' },*/
 ]
-
-const logout = () => {
-    try {
-        authStore.logout()
-
-        router.push({ name: 'dashboard'})
-    } catch (error) {
-        if (error.response && error.response.status === 422) {
-            errors.value = error.response.data.errors
-        } else {
-            console.error('An error occurred during the login process.', error)
-        }
-    }
-}
 </script>
