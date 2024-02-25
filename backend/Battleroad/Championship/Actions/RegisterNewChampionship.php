@@ -1,8 +1,8 @@
 <?php
 
-namespace Battleroad\Championship\UseCases;
+namespace Battleroad\Championship\Actions;
 
-use Battleroad\Championship\DTOs\ChampionshipRequest;
+use Battleroad\Championship\Infra\Http\Requests\RegisterNewChampionship as Request;
 use Battleroad\Championship\Infra\Models\Championship as ChampionshipModel;
 use Battleroad\Championship\Infra\Repositories\ChampionshipRepository;
 
@@ -12,9 +12,9 @@ class RegisterNewChampionship
     {
     }
 
-    public function execute(ChampionshipRequest $championshipRequest): ChampionshipModel
+    public function execute(Request $request): ChampionshipModel
     {
-        return $this->repository->create($championshipRequest);
+        return $this->repository->create($request);
 
         // @todo Dispatch NewChampionshipWasRegistered
     }

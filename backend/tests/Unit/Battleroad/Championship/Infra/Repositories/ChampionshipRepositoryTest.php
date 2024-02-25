@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Battleroad\Championship\Infra\Repositories;
 
-use Battleroad\Championship\DTOs\ChampionshipRequest;
 use Battleroad\Championship\Infra\Database\Factories\ChampionshipFactory;
+use Battleroad\Championship\Infra\Http\Requests\RegisterNewChampionship;
 use Battleroad\Championship\Infra\Models\Championship as Model;
 use Battleroad\Championship\Infra\Repositories\ChampionshipRepository;
 use Mockery;
@@ -25,6 +25,8 @@ class ChampionshipRepositoryTest extends TestCase
             'picture' => fake()->imageUrl,
         ];
 
+        $request = Mockery::mock(RegisterNewChampionship::class);
+
         $newModel = ChampionshipFactory::new()->make(array_merge(
             ['id' => 'someChampionshipId123'],
             $requestData
@@ -35,10 +37,34 @@ class ChampionshipRepositoryTest extends TestCase
             ->create($requestData)
             ->andReturn($newModel);
 
+        $request->expects()
+            ->get('ownerId')
+            ->andReturn($requestData['owner_id']);
+
+        $request->expects()
+            ->get('title')
+            ->andReturn($requestData['title']);
+
+        $request->expects()
+            ->get('description')
+            ->andReturn($requestData['description']);
+
+        $request->expects()
+            ->get('location')
+            ->andReturn($requestData['location']);
+
+        $request->expects()
+            ->get('startAt')
+            ->andReturn($requestData['start_at']);
+
+        $request->expects()
+            ->get('picture')
+            ->andReturn($requestData['picture']);
+
         // Actions
         $repository = new ChampionshipRepository($model);
-        $championshipRequest = new ChampionshipRequest(...array_values($requestData));
-        $model = $repository->create($championshipRequest);
+        $model = $repository->create($request);
+
         // Assertions
         $this->assertInstanceOf(Model::class, $model);
         $this->assertSame($model->title, $requestData['title']);

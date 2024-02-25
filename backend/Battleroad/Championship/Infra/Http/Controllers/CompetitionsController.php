@@ -3,11 +3,10 @@
 namespace Battleroad\Championship\Infra\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Battleroad\Championship\DTOs\AddCompetitionRequest as CompetitionRequest;
 use Battleroad\Championship\Infra\Http\Requests\AddCompetition;
 use Battleroad\Championship\Infra\Models\Championship;
 use Battleroad\Championship\Infra\Presenters\ChampionshipPresenter;
-use Battleroad\Championship\UseCases\AddCompetitionToChampionship;
+use Battleroad\Championship\Actions\AddCompetitionToChampionship;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,14 +20,7 @@ class CompetitionsController extends Controller
 
     public function store(Championship $championship, AddCompetition $request): JsonResponse
     {
-        $competitionRequest = new CompetitionRequest(
-            $championship,
-            $request->get('gameId'),
-            $request->get('platformId'),
-            $request->date('startAt'),
-        );
-
-        $championship = $this->service->execute($competitionRequest);
+        $championship = $this->service->execute($championship, $request);
 
         $data = $this->presenter->single($championship);
 

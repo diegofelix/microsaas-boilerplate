@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\Battleroad\Championship\Actions;
 
-use Battleroad\Championship\DTOs\ChampionshipRequest;
+use Battleroad\Championship\Infra\Http\Requests\RegisterNewChampionship as Request;
 use Battleroad\Championship\Infra\Models\Championship as ChampionshipModel;
 use Battleroad\Championship\Infra\Repositories\ChampionshipRepository;
-use Battleroad\Championship\UseCases\RegisterNewChampionship;
+use Battleroad\Championship\Actions\RegisterNewChampionship;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 
@@ -17,14 +17,7 @@ class RegisterNewChampionshipTest extends TestCase
         $repository = Mockery::mock(ChampionshipRepository::class);
         $action = new RegisterNewChampionship($repository);
         $model = Mockery::mock(ChampionshipModel::class);
-        $request = new ChampionshipRequest(
-            1,
-            'title',
-            'description',
-            'some location',
-            new \DateTime('tomorrow'),
-            'https://cdn.battleroad.test/picture.jpg',
-        );
+        $request = Mockery::mock(Request::class);
 
         // Expectations
         $repository->expects()

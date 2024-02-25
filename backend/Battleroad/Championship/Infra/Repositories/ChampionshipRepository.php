@@ -2,35 +2,36 @@
 
 namespace Battleroad\Championship\Infra\Repositories;
 
-use Battleroad\Championship\DTOs\AddCompetitionRequest;
-use Battleroad\Championship\DTOs\ChampionshipRequest;
+use Battleroad\Championship\Infra\Http\Requests\AddCompetition;
+use Battleroad\Championship\Infra\Http\Requests\RegisterNewChampionship;
+use Battleroad\Championship\Infra\Models\Championship;
 use Battleroad\Championship\Infra\Models\Championship as Model;
 
 class ChampionshipRepository
 {
-    public function __construct(private readonly Model $model)
-    {
+    public function __construct(
+        private readonly Model $model,
+    ) {
     }
 
-    public function create(ChampionshipRequest $championshipRequest): Model
+    public function create(RegisterNewChampionship $request): Model
     {
         return $this->model->create([
-            'owner_id' => $championshipRequest->ownerId,
-            'title' => $championshipRequest->title,
-            'description' => $championshipRequest->description,
-            'location' => $championshipRequest->location,
-            'start_at' => $championshipRequest->startAt,
-            'picture' => $championshipRequest->picture,
+            'owner_id' => $request->get('ownerId'),
+            'title' => $request->get('title'),
+            'description' => $request->get('description'),
+            'location' => $request->get('location'),
+            'start_at' => $request->get('startAt'),
+            'picture' => $request->get('picture'),
         ]);
     }
 
-    public function addCompetition(AddCompetitionRequest $request): Model
+    public function addCompetition(Championship $championship, AddCompetition $request): Model
     {
-        $championship = $request->championship;
         $championship->competitions()->create([
-            'game_id' => $request->gameId,
-            'platform_id' => $request->platformId,
-            'start_at' => $request->startAt,
+            'game_id' => $request->get('gameId'),
+            'platform_id' => $request->get('platformId'),
+            'start_at' => $request->get('startAt'),
         ]);
 
         return $championship;

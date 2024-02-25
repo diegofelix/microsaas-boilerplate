@@ -3,10 +3,9 @@
 namespace Battleroad\Championship\Infra\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Battleroad\Championship\DTOs\ChampionshipRequest;
-use Battleroad\Championship\Infra\Http\Requests\RegisterNewChampionship as Request;
+use Battleroad\Championship\Infra\Http\Requests\RegisterNewChampionship;
 use Battleroad\Championship\Infra\Presenters\ChampionshipPresenter;
-use Battleroad\Championship\UseCases\RegisterNewChampionship as Service;
+use Battleroad\Championship\Actions\RegisterNewChampionship as Service;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,18 +17,9 @@ class ChampionshipsController extends Controller
     ) {
     }
 
-    public function store(Request $request): JsonResponse
+    public function store(RegisterNewChampionship $request): JsonResponse
     {
-        $championshipRequest = new ChampionshipRequest(
-            $request->user()->id,
-            $request->get('title'),
-            $request->get('description'),
-            $request->get('location'),
-            $request->date('startAt'),
-            $request->get('picture')
-        );
-
-        $championship = $this->service->execute($championshipRequest);
+        $championship = $this->service->execute($request);
 
         $data = $this->presenter->single($championship);
 
