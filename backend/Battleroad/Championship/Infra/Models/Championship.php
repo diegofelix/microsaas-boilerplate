@@ -2,7 +2,8 @@
 
 namespace Battleroad\Championship\Infra\Models;
 
-use App\Models\User;
+use Battleroad\Account\Infra\Models\User;
+use Battleroad\Championship\Infra\Database\Factories\ChampionshipFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use MongoDB\Laravel\Eloquent\Model;
 use MongoDB\Laravel\Relations\EmbedsMany;

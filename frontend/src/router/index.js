@@ -1,5 +1,8 @@
 import {createRouter, createWebHistory} from 'vue-router';
 import DefaultLayout from "../Layouts/DefaultLayout.vue";
+import DashboardLayout from "../Layouts/DashboardLayout.vue";
+import Dashboard from "../Views/Dashboard.vue";
+import { useAuthStore } from "../stores/auth.js";
 
 const Home = () => import("../Views/Home.vue")
 const Championships = () => import("../Views/Championships.vue")
@@ -11,12 +14,46 @@ const routes = [
         path: '/',
         component: DefaultLayout,
         children: [
-            { path: '/', name: 'home', component: Home },
-            { path: 'championships', name: 'championships', component: Championships },
-            { path: 'login', name: 'session.create', component: Login },
-            { path: 'ranking', name: 'ranking', component: Championships },
-            { path: 'ranking', name: 'how-it-works', component: Championships },
+            {
+                path: '/',
+                name: 'home',
+                component: () => import("../Views/Home.vue"),
+            },
+            {
+                path: 'championships',
+                name: 'championships',
+                component: () => import("../Views/Championships.vue"),
+            },
+            {
+                path: 'login',
+                name: 'session.create',
+                component: () =>import("../Views/Login.vue")
+            },
+            {
+                path: 'ranking',
+                name: 'ranking',
+                component: () => import("../Views/Championships.vue")
+            },
+            {
+                path: 'ranking',
+                name: 'how-it-works',
+                component: () => import("../Views/Championships.vue")
+            }
         ]
+    },
+    {
+        path: '/dashboard',
+        component: DashboardLayout,
+        children: [
+            {
+                path: '/dashboard',
+                name: 'dashboard',
+                component: () => import("../Views/Dashboard.vue"),
+                meta: {
+                    requiresAuth: true
+                }
+            },
+        ],
     },
 ];
 
@@ -25,5 +62,18 @@ const router = createRouter({
     history: createWebHistory(),
     routes,
 });
+
+router.beforeEach((to, from, next) => {
+    let routeRequiresAuth = to.matched.some(record => record.meta.requiresAuth);
+    let userIsAuthenticated = useAuthStore().isLoggedIn;
+
+    console.log(routeRequiresAuth, userIsAuthenticated)
+
+    if (routeRequiresAuth && !userIsAuthenticated) {
+        next({ name: 'session.create' })
+    } else {
+        next()
+    }
+})
 
 export default router;

@@ -2,7 +2,8 @@
 
 namespace Tests\Feature\Battleroad\Championship;
 
-use App\Models\User;
+use Battleroad\Account\Infra\Database\Factories\UserFactory;
+use Battleroad\Account\Infra\Models\User;
 use DateTime;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
@@ -12,7 +13,7 @@ class RegisterChampionshipTest extends TestCase
     public function test_should_shows_validation_errors(): void
     {
         // Set
-        $user = User::factory()->create();
+        $user = UserFactory::new()->create();
         $this->actingAs($user);
 
         // Actions
@@ -37,7 +38,7 @@ class RegisterChampionshipTest extends TestCase
     public function test_it_can_register_a_new_championship(): void
     {
         // Set
-        $user = User::factory()->create();
+        $user = UserFactory::new()->create();
         $startAt = new DateTime('tomorrow midnight');
         $this->actingAs($user);
 

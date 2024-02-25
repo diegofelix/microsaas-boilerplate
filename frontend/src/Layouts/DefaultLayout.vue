@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white">
-        <Header />
+        <HomeHeader />
 
         <div class="relative isolate px-6 pt-14 lg:px-8">
             <div class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
@@ -9,11 +9,11 @@
             <div class="mx-auto max-w-2xl">
                 <router-view />
             </div>
-            <Footer />
+            <HomeFooter />
         </div>
     </div>
 </template>
 <script setup>
-import Header from '../components/Common/Header.vue'
-import Footer from '../components/Common/Footer.vue'
+import HomeHeader from '../components/Common/HomeHeader.vue'
+import HomeFooter from '../components/Common/HomeFooter.vue'
 </script>

@@ -2,10 +2,12 @@
 
 namespace Tests\Feature\Battleroad\Championship;
 
-use App\Models\User;
+use Battleroad\Account\Infra\Database\Factories\UserFactory;
+use Battleroad\Account\Infra\Models\User;
 use Battleroad\Championship\Infra\Database\Factories\ChampionshipFactory;
 use Battleroad\Championship\Infra\Database\Factories\GameFactory;
 use Battleroad\Championship\Infra\Database\Factories\PlatformFactory;
+use Battleroad\Championship\Infra\Models\Championship;
 use DateTime;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
@@ -15,7 +17,7 @@ class AddCompetitionTest extends TestCase
     public function test_should_not_add_competition_to_an_invalid_championship(): void
     {
         // Set
-        $user = User::factory()->create();
+        $user = UserFactory::new()->create();
         $this->actingAs($user);
 
         // Actions
@@ -28,7 +30,7 @@ class AddCompetitionTest extends TestCase
     public function test_should_should_validation_errors(): void
     {
         // Set
-        $user = User::factory()->create();
+        $user = UserFactory::new()->create();
         $championship = ChampionshipFactory::new()->create();
         $championshipId = $championship->_id;
         $startAt = new DateTime('tomorrow midnight');
@@ -58,7 +60,7 @@ class AddCompetitionTest extends TestCase
     public function test_should_add_competition_to_championship(): void
     {
         // Set
-        $user = User::factory()->create();
+        $user = UserFactory::new()->create();
         $championship = ChampionshipFactory::new()->create();
         $game = GameFactory::new()->create();
         $platform = PlatformFactory::new()->create();
