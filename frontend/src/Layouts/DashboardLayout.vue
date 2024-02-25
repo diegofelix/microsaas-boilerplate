@@ -33,7 +33,10 @@
                                 <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
                                     <MenuItems class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                         <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
-                                            <a :href="item.href" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item.name }}</a>
+                                            <router-link :to="{ name: item.route }" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item.name }}</router-link>
+                                        </MenuItem>
+                                        <MenuItem v-slot="{ active }">
+                                            <a href="#" @click="logout" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign out</a>
                                         </MenuItem>
                                     </MenuItems>
                                 </transition>
@@ -94,12 +97,15 @@
 <script setup>
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { useAuthStore } from '../stores/auth.js'
+import router from "../router/index.js";
+
+const authStore = useAuthStore()
 
 const user = {
-    name: 'Tom Cook',
-    email: 'tom@example.com',
-    imageUrl:
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    name: authStore.user.value.name,
+    email: authStore.user.value.email,
+    imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 const navigation = [
     { name: 'Dashboard', href: '#', current: true },
@@ -109,8 +115,22 @@ const navigation = [
     { name: 'Reports', href: '#', current: false },
 ]
 const userNavigation = [
-    { name: 'Your Profile', href: '#' },
-    { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '#' },
+    { name: 'Your Profile', route: 'dashboard' },
+    { name: 'Settings', route: 'dashboard' },
+    /*{ name: 'Sign out', route: 'Logout' },*/
 ]
+
+const logout = () => {
+    try {
+        authStore.logout()
+
+        router.push({ name: 'dashboard'})
+    } catch (error) {
+        if (error.response && error.response.status === 422) {
+            errors.value = error.response.data.errors
+        } else {
+            console.error('An error occurred during the login process.', error)
+        }
+    }
+}
 </script>

@@ -1,15 +1,18 @@
 <template>
-    <h2>Dashboard home</h2>
+    <div v-if="user">
+        <h2>Dashboard, home of the user {{ user.name }}</h2>
+    </div>
+    <div v-else>
+        <h2>Dashboard, home of the user!</h2>
+    </div>
 </template>
 <script setup>
 import { useAuthStore } from '../stores/auth.js'
-import { onMounted } from "vue";
+import { computed } from 'vue';
 
-onMounted(() => {
-    const authStore = useAuthStore()
+const authStore = useAuthStore()
 
-    authStore.getUser().then((user) => {
-        console.log(user)
-    })
+const user = computed(() => {
+    return authStore.user.value
 })
 </script>
