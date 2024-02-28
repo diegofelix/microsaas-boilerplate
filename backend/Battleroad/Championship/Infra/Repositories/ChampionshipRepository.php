@@ -26,12 +26,9 @@ class ChampionshipRepository
 
     public function addCompetition(Championship $championship, AddCompetition $request): Model
     {
-        $championship->competitions()->create([
-            'game_id' => $request->get('game_id'),
-            'platform_id' => $request->get('platform_id'),
-            'start_at' => $request->get('start_at'),
-            'end_at' => $request->get('end_at'),
-        ]);
+        $attributes = $request->only(['game_id', 'platform_id', 'start_at', 'end_at']);
+
+        $championship->competitions()->create($attributes);
 
         return $championship;
     }
