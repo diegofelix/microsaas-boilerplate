@@ -17,21 +17,20 @@ class ChampionshipRepository
     public function create(RegisterNewChampionship $request): Model
     {
         return $this->model->create([
-            'owner_id' => $request->get('ownerId'),
+            'owner_id' => $request->user()->_id,
             'title' => $request->get('title'),
-            'description' => $request->get('description'),
-            'location' => $request->get('location'),
-            'start_at' => $request->get('startAt'),
-            'picture' => $request->get('picture'),
+            'start_at' => $request->get('start_at'),
+            'end_at' => $request->get('end_at'),
         ]);
     }
 
     public function addCompetition(Championship $championship, AddCompetition $request): Model
     {
         $championship->competitions()->create([
-            'game_id' => $request->get('gameId'),
-            'platform_id' => $request->get('platformId'),
-            'start_at' => $request->get('startAt'),
+            'game_id' => $request->get('game_id'),
+            'platform_id' => $request->get('platform_id'),
+            'start_at' => $request->get('start_at'),
+            'end_at' => $request->get('end_at'),
         ]);
 
         return $championship;

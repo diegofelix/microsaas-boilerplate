@@ -12,12 +12,16 @@ class Competition extends Model
      *
      * @var string[]
      */
-    protected $casts = ['start_at' => 'datetime'];
+    protected $casts = [
+        'start_at' => 'datetime',
+        'end_at' => 'datetime',
+    ];
 
     protected $fillable = [
         'game_id',
         'platform_id',
         'start_at',
+        'end_at',
     ];
 
     public function game(): BelongsTo

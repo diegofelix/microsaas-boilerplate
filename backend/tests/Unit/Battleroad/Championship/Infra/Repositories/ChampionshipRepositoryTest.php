@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Battleroad\Championship\Infra\Repositories;
 
+use Battleroad\Account\Infra\Models\User;
 use Battleroad\Championship\Infra\Database\Factories\ChampionshipFactory;
 use Battleroad\Championship\Infra\Http\Requests\RegisterNewChampionship;
 use Battleroad\Championship\Infra\Models\Championship as Model;
@@ -15,14 +16,12 @@ class ChampionshipRepositoryTest extends TestCase
     {
         // Set
         $model = Mockery::mock(Model::class);
-
+        $user = Mockery::mock(User::class);
         $requestData = [
             'owner_id' => 'someOwnerId123',
             'title' => fake()->title,
-            'description' => fake()->sentence,
-            'location' => fake()->country,
             'start_at' => fake()->dateTime,
-            'picture' => fake()->imageUrl,
+            'end_at' => fake()->dateTime,
         ];
 
         $request = Mockery::mock(RegisterNewChampionship::class);
@@ -38,28 +37,24 @@ class ChampionshipRepositoryTest extends TestCase
             ->andReturn($newModel);
 
         $request->expects()
-            ->get('ownerId')
-            ->andReturn($requestData['owner_id']);
+            ->user()
+            ->andReturn($user);
+
+        $user->expects()
+            ->getAttribute('_id')
+            ->andReturn('someOwnerId123');
 
         $request->expects()
             ->get('title')
             ->andReturn($requestData['title']);
 
         $request->expects()
-            ->get('description')
-            ->andReturn($requestData['description']);
-
-        $request->expects()
-            ->get('location')
-            ->andReturn($requestData['location']);
-
-        $request->expects()
-            ->get('startAt')
+            ->get('start_at')
             ->andReturn($requestData['start_at']);
 
         $request->expects()
-            ->get('picture')
-            ->andReturn($requestData['picture']);
+            ->get('end_at')
+            ->andReturn($requestData['end_at']);
 
         // Actions
         $repository = new ChampionshipRepository($model);

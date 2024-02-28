@@ -22,7 +22,7 @@ class RegisterChampionshipTest extends TestCase
         // Assertions
         $response->assertUnprocessable();
         $response->assertJsonValidationErrors([
-            'title', 'description', 'location', 'startAt', 'picture',
+            'title', 'start_at', 'end_at',
         ]);
     }
 
@@ -39,7 +39,8 @@ class RegisterChampionshipTest extends TestCase
     {
         // Set
         $user = UserFactory::new()->create();
-        $startAt = new DateTime('tomorrow midnight');
+        $startAt = new DateTime('tomorrow');
+        $endAt = new DateTime('tomorrow midnight');
         $this->actingAs($user);
 
         // Actions
@@ -47,7 +48,8 @@ class RegisterChampionshipTest extends TestCase
             'title' => 'Capcom Cup',
             'description' => 'The ultimate Fighting Game Championship',
             'location' => 'Brazil',
-            'startAt' => $startAt->format('Y-m-d H:i:s'),
+            'start_at' => $startAt->format('Y-m-d H:i:s'),
+            'end_at' => $endAt->format('Y-m-d H:i:s'),
             'picture' => 'https://cdn.some.url/picture.jpg',
         ]);
 
@@ -55,10 +57,8 @@ class RegisterChampionshipTest extends TestCase
         $response->assertStatus(Response::HTTP_CREATED);
         $response->assertJsonFragment([
             'title' => 'Capcom Cup',
-            'description' => 'The ultimate Fighting Game Championship',
-            'location' => 'Brazil',
-            'picture' => 'https://cdn.some.url/picture.jpg',
-            'startAt' => $startAt->format('Y-m-d H:i:s'),
+            'start_at' => $startAt->format('Y-m-d H:i:s'),
+            'end_at' => $endAt->format('Y-m-d H:i:s'),
         ]);
     }
 }

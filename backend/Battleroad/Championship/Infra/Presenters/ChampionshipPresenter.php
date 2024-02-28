@@ -18,7 +18,8 @@ class ChampionshipPresenter
             'title' => $championship->title,
             'description' => $championship->description,
             'location' => $championship->location,
-            'startAt' => $championship->start_at->format('Y-m-d H:i:s'),
+            'start_at' => $championship->start_at->format('Y-m-d H:i:s'),
+            'end_at' => $championship->end_at->format('Y-m-d H:i:s'),
             'picture' => $championship->picture,
             'competitions' => $this->competition->many($championship->competitions),
         ];

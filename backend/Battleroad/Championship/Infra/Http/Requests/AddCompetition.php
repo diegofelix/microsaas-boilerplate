@@ -19,9 +19,10 @@ class AddCompetition extends FormRequest
         $platformModel = Platform::class;
 
         return [
-            'gameId' => ['required', 'string', "exists:{$gameModel},_id"],
-            'platformId' => ['required', 'string', "exists:{$platformModel},_id"],
-            'startAt' => ['required', 'date'],
+            'game_id' => ['required', 'string', "exists:{$gameModel},_id"],
+            'platform_id' => ['required', 'string', "exists:{$platformModel},_id"],
+            'start_at' => ['required', 'date'],
+            'end_at' => ['required', 'date'],
         ];
     }
 }

@@ -33,19 +33,21 @@ class AddCompetitionTest extends TestCase
         $user = UserFactory::new()->create();
         $championship = ChampionshipFactory::new()->create();
         $championshipId = $championship->_id;
-        $startAt = new DateTime('tomorrow midnight');
+        $startAt = new DateTime('tomorrow');
+        $endAt = new DateTime('tomorrow midnight');
         $this->actingAs($user);
 
         // Actions
         $response = $this->postJson("api/v1/championships/{$championshipId}/competitions", [
-            'gameId' => '1',
-            'platformId' => '2',
-            'startAt' => $startAt->format('Y-m-d H:i:s'),
+            'game_id' => '1',
+            'platform_id' => '2',
+            'start_at' => $startAt->format('Y-m-d H:i:s'),
+            'end_at' => $endAt->format('Y-m-d H:i:s'),
         ]);
 
         // Assertions
         $response->assertUnprocessable();
-        $response->assertJsonValidationErrors(['gameId', 'platformId']);
+        $response->assertJsonValidationErrors(['game_id', 'platform_id']);
     }
 
     public function test_should_not_add_competitions_without_being_logged_in(): void
@@ -65,14 +67,16 @@ class AddCompetitionTest extends TestCase
         $game = GameFactory::new()->create();
         $platform = PlatformFactory::new()->create();
         $championshipId = $championship->_id;
-        $startAt = new DateTime('tomorrow midnight');
+        $startAt = new DateTime('tomorrow');
+        $endAt = new DateTime('tomorrow midnight');
         $this->actingAs($user);
 
         // Actions
         $response = $this->postJson("api/v1/championships/{$championshipId}/competitions", [
-            'gameId' => $game->_id,
-            'platformId' => $platform->_id,
-            'startAt' => $startAt->format('Y-m-d H:i:s'),
+            'game_id' => $game->_id,
+            'platform_id' => $platform->_id,
+            'start_at' => $startAt->format('Y-m-d H:i:s'),
+            'end_at' => $endAt->format('Y-m-d H:i:s'),
         ]);
 
         // Assertions
@@ -82,7 +86,8 @@ class AddCompetitionTest extends TestCase
             [
                 'game' => $game->title,
                 'platform' => $platform->title,
-                'startAt' => $startAt->format('Y-m-d H:i:s'),
+                'start_at' => $startAt->format('Y-m-d H:i:s'),
+                'end_at' => $endAt->format('Y-m-d H:i:s'),
             ],
         ]);
     }

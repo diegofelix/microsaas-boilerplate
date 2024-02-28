@@ -15,6 +15,7 @@ class CompetitionFactory extends Factory
             'game_id' => $this->faker->uuid,
             'platform_id' => $this->faker->uuid,
             'start_at' => $this->faker->dateTime,
+            'end_at' => $this->faker->dateTime,
         ];
     }
 }

@@ -15,7 +15,10 @@ class Championship extends Model
      *
      * @var string[]
      */
-    protected $casts = ['start_at' => 'datetime'];
+    protected $casts = [
+        'start_at' => 'datetime',
+        'end_at' => 'datetime',
+    ];
 
     /**
      * As we have total control over what we are inputting to this method

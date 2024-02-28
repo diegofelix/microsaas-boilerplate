@@ -16,6 +16,7 @@ class ChampionshipFactory extends Factory
             'description' => $this->faker->sentence,
             'location' => $this->faker->country,
             'start_at' => $this->faker->dateTime,
+            'end_at' => $this->faker->dateTime,
             'picture' => $this->faker->imageUrl,
             'created_at' => now(),
             'updated_at' => now(),

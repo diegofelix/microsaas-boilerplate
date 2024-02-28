@@ -15,10 +15,8 @@ class RegisterNewChampionship extends FormRequest
     {
         return [
             'title' => ['required', 'string'],
-            'description' => ['required', 'string'],
-            'location' => ['required', 'string'],
-            'startAt' => ['required', 'date'],
-            'picture' => ['required', 'string'],
+            'start_at' => ['required', 'date'],
+            'end_at' => ['required', 'date'],
         ];
     }
 }

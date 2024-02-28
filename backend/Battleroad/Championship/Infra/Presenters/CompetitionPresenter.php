@@ -12,7 +12,8 @@ class CompetitionPresenter
         return [
             'game' => $competition->game->title,
             'platform' => $competition->platform->title,
-            'startAt' => $competition->start_at->format('Y-m-d H:i:s'),
+            'start_at' => $competition->start_at->format('Y-m-d H:i:s'),
+            'end_at' => $competition->end_at->format('Y-m-d H:i:s'),
         ];
     }
 

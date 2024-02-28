@@ -26,7 +26,8 @@ class ChampionshipPresenterTest extends TestCase
             'title' => $model->title,
             'description' => $model->description,
             'location' => $model->location,
-            'startAt' => $model->start_at->format('Y-m-d H:i:s'),
+            'start_at' => $model->start_at->format('Y-m-d H:i:s'),
+            'end_at' => $model->end_at->format('Y-m-d H:i:s'),
             'picture' => $model->picture,
             'competitions' => [],
         ];
@@ -59,7 +60,8 @@ class ChampionshipPresenterTest extends TestCase
             'title' => $model->title,
             'description' => $model->description,
             'location' => $model->location,
-            'startAt' => $model->start_at->format('Y-m-d H:i:s'),
+            'start_at' => $model->start_at->format('Y-m-d H:i:s'),
+            'end_at' => $model->end_at->format('Y-m-d H:i:s'),
             'picture' => $model->picture,
             'competitions' => ['presented' => 'data'],
         ];
