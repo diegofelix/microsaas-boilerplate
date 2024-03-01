@@ -43,12 +43,21 @@ const routes = [
     },
     {
         path: '/dashboard',
+        name: 'dashboard.',
         component: DashboardLayout,
         children: [
             {
-                path: '/dashboard',
-                name: 'dashboard',
+                path: '',
+                name: '.index',
                 component: () => import("../Views/Dashboard.vue"),
+                meta: {
+                    requiresAuth: true
+                }
+            },
+            {
+                path: '/criar-campeonato',
+                name: 'register-championship',
+                component: () => import("../Views/Championship/Register.vue"),
                 meta: {
                     requiresAuth: true
                 }
