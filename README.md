@@ -1,9 +1,6 @@
-# Battleroad
+# Micro-SaaS Boilerplate
 
-Experimenting new things on my old championship platform.
-
-## Tasks
-[] Rollback entities
+Trying to create a micro saas boilerplate while experimenting new things
 
 ## Notes
 
